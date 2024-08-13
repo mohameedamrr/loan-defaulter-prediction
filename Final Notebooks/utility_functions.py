@@ -14,6 +14,10 @@ def get_numerical_summary(df):
         print("{} : {} ({}%)".format(col, null_count, round(per, 3)))
     return missing_percent
 
+def get_categorical_features(df):
+    categorical_features = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    return categorical_features
+
 def calculate_metrics(validation_data, predicted_data):
     accuracy = accuracy_score(validation_data,predicted_data)
     f1_score = f1_score(validation_data,predicted_data)
