@@ -1,7 +1,17 @@
 # This file is for utility functions to be used in the notebook.
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from pathlib import Path 
+from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import ADASYN
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
+plt.style.use('ggplot')
+pd.set_option('display.max_columns', 200) # So we can see all columns
+pd.set_option('display.max_rows',200)
+
 
 def get_numerical_summary(df):
     total = df.shape[0]
@@ -29,3 +39,19 @@ def calculate_metrics(validation_data, predicted_data):
     print(f"Accuracy: {accuracy:.4f}")
     print(f"F1 Score: {f1:.4f}")
     print(f"ROC-AUC Score: {roc:.4f}")
+
+def setup_model(df):
+    # Split the data into features (X) and target (y)
+    x = df.drop('TARGET', axis=1)
+    y = df['TARGET']
+
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+
+    adasyn = ADASYN(sampling_strategy='minority', random_state=42)
+    X_train_resampled, y_train_resampled = adasyn.fit_resample(X_train, y_train)
+
+    X_train_res, X_val, y_train_res, y_val = train_test_split(X_train_resampled, y_train_resampled, test_size=0.3, random_state=42)
+    return X_train_res,X_val,y_train_res,y_val,X_test,y_test
+
+
