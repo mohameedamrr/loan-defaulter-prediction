@@ -18,10 +18,14 @@ def get_categorical_features(df):
     categorical_features = df.select_dtypes(include=['object', 'category']).columns.tolist()
     return categorical_features
 
+
 def calculate_metrics(validation_data, predicted_data):
-    accuracy = accuracy_score(validation_data,predicted_data)
-    f1_score = f1_score(validation_data,predicted_data)
-    roc = roc_auc_score(validation_data,predicted_data)
+    # Calculate metrics
+    accuracy = accuracy_score(validation_data, predicted_data)
+    f1 = f1_score(validation_data, predicted_data)
+    roc = roc_auc_score(validation_data, predicted_data)
+    
+    # Print metrics
     print(f"Accuracy: {accuracy:.4f}")
-    print(f"F1 Score: {f1_score:.4f}")
+    print(f"F1 Score: {f1:.4f}")
     print(f"ROC-AUC Score: {roc:.4f}")
