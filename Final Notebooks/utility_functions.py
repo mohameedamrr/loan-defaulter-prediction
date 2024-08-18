@@ -2,10 +2,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from pathlib import Path 
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import ADASYN
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
 plt.style.use('ggplot')
