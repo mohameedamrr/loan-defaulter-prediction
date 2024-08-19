@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import ADASYN
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
+from sklearn.metrics import accuracy_score, roc_auc_score, f1_score,precision_score,recall_score
 plt.style.use('ggplot')
 pd.set_option('display.max_columns', 200) # So we can see all columns
 pd.set_option('display.max_rows',200)
@@ -32,11 +32,15 @@ def calculate_metrics(validation_data, predicted_data):
     accuracy = accuracy_score(validation_data, predicted_data)
     f1 = f1_score(validation_data, predicted_data)
     roc = roc_auc_score(validation_data, predicted_data)
+    precision = precision_score(validation_data, predicted_data)
+    recall = recall_score(validation_data, predicted_data)
     
     # Print metrics
     print(f"Accuracy: {accuracy:.4f}")
     print(f"F1 Score: {f1:.4f}")
     print(f"ROC-AUC Score: {roc:.4f}")
+    print(f"Precision: {precision:4f}" )
+    print(f"Recall: {recall: 4f}" )
 
 def setup_model(df):
     # Split the data into features (X) and target (y)
