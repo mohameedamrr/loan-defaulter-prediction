@@ -52,7 +52,7 @@ def setup_model(df):
 
     adasyn = ADASYN(sampling_strategy='minority', random_state=42)
     X_train_resampled, y_train_resampled = adasyn.fit_resample(X_train, y_train)
-
+        
     X_train_res, X_val, y_train_res, y_val = train_test_split(X_train_resampled, y_train_resampled, test_size=0.3, random_state=42)
     return X_train_res,X_val,y_train_res,y_val,X_test,y_test
 
